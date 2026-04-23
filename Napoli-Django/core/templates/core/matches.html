@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<h1>📅 Matches</h1>
+<div class="card">
+    <table>
+        <tr><th>Opponent</th><th>Date</th><th>H/A</th><th>Score</th><th>Result</th><th>Competition</th></tr>
+        {% for match in matches %}
+        <tr>
+            <td>vs {{ match.opponent }}</td>
+            <td>{{ match.match_date }}</td>
+            <td>{{ match.home_or_away }}</td>
+            <td>{{ match.goals_for }} - {{ match.goals_against }}</td>
+            <td>{% if match.goals_for > match.goals_against %}🟢 W{% elif match.goals_for < match.goals_against %}🔴 L{% else %}🟡 D{% endif %}</td>
+            <td>{{ match.competition }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="6">No matches logged yet.</td></tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<h1>⚽ Napoli FC Dashboard</h1>
+<div class="metrics">
+    <div class="metric">
+        <h2>{{ total_players }}</h2>
+        <p>Active Players</p>
+    </div>
+    <div class="metric">
+        <h2>£{{ total_wages }}</h2>
+        <p>Weekly Wage Bill</p>
+    </div>
+    <div class="metric">
+        <h2>{{ total_matches }}</h2>
+        <p>Matches Played</p>
+    </div>
+</div>
+<div class="card">
+    <h2>Recent Matches</h2>
+    <table>
+        <tr><th>Opponent</th><th>Date</th><th>H/A</th><th>Score</th><th>Competition</th></tr>
+        {% for match in recent_matches %}
+        <tr>
+            <td>vs {{ match.opponent }}</td>
+            <td>{{ match.match_date }}</td>
+            <td>{{ match.home_or_away }}</td>
+            <td>{{ match.goals_for }} - {{ match.goals_against }}</td>
+            <td>{{ match.competition }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5">No matches logged yet.</td></tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
